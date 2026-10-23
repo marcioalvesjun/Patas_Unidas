@@ -26,7 +26,6 @@ class ProfileViewModel : ViewModel() {
         private set
 
     // IP do servidor para montar a URL da imagem
-    private val BASE_USER_IMAGE_URL = "https://patas-unidas-api.onrender.com/user/image/"
 
     init {
         loadUserProfile()
@@ -107,6 +106,6 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun getUserImageUrl(photoName: String?): String? {
-        return if (!photoName.isNullOrBlank()) "$BASE_USER_IMAGE_URL$photoName" else null
+        return RetrofitClient.userImageUrl(photoName)
     }
 }

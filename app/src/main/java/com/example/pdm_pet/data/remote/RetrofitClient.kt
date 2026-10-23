@@ -7,9 +7,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    // URL do servidor online (Render)
-    // OBS: Servidores gratuitos no Render podem demorar até 50s para "acordar" na primeira requisição.
-    private const val BASE_URL = "https://patas-unidas-api.onrender.com/"
+    private const val BASE_URL = "https://patas-api.despesai.com.br/"
+
+    fun animalImageUrl(photoName: String?): String? =
+        photoName?.takeIf { it.isNotBlank() }?.let { "${BASE_URL}animalprofile/image/$it" }
+
+    fun userImageUrl(photoName: String?): String? =
+        photoName?.takeIf { it.isNotBlank() }?.let { "${BASE_URL}user/image/$it" }
 
     private val client = OkHttpClient.Builder().addInterceptor { chain ->
         val original = chain.request()

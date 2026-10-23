@@ -1,5 +1,7 @@
 package com.example.pdm_pet.features.feed
 
+import com.example.pdm_pet.utils.animalStatusLabel
+
 import android.annotation.SuppressLint
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -30,7 +32,6 @@ class FeedViewModel : ViewModel() {
     var errorMsg by mutableStateOf<String?>(null)
 
     // URL de imagem do servidor online
-    private val BASE_IMAGE_URL = "https://patas-unidas-api.onrender.com/animalprofile/image/"
 
     // Agora o fetchAnimals pede latitude e longitude
     @SuppressLint("DefaultLocale")
@@ -53,11 +54,7 @@ class FeedViewModel : ViewModel() {
 
                     remoteList.forEach { remoteAnimal ->
                         val firstPhotoName = remoteAnimal.photos?.firstOrNull()
-                        val fullImageUrl = if (!firstPhotoName.isNullOrBlank()) {
-                            "$BASE_IMAGE_URL$firstPhotoName"
-                        } else {
-                            null
-                        }
+                        val fullImageUrl = RetrofitClient.animalImageUrl(firstPhotoName)
 
                         val genderDisplay = when(remoteAnimal.sex) {
                             "MALE" -> "Macho"
@@ -74,7 +71,7 @@ class FeedViewModel : ViewModel() {
                                 name = remoteAnimal.provisionalName,
                                 description = remoteAnimal.description ?: "Sem descrição",
                                 photoUrl = fullImageUrl,
-                                status = remoteAnimal.status ?: "Desconhecido",
+                                status = animalStatusLabel(remoteAnimal.status),
                                 gender = genderDisplay,
                                 distance = distDisplay
                             )

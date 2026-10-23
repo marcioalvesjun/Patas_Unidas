@@ -1,5 +1,7 @@
 package com.example.pdm_pet.features.animal_profile
 
+import com.example.pdm_pet.utils.animalStatusLabel
+
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -199,11 +201,7 @@ fun AnimalDetailsScreen(
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         InfoCard("Idade", animal.approximateAge ?: "?")
                         InfoCard("Porte", animal.size ?: "?")
-                        val statusDisplay = when (animal.status) {
-                            "ON_STREET" -> "Na Rua"
-                            "AVAILABLE_FOR_ADOPTION" -> "Para Adoção"
-                            else -> animal.status ?: "?"
-                        }
+                        val statusDisplay = animalStatusLabel(animal.status)
                         InfoCard("Status", statusDisplay)
                     }
                 }

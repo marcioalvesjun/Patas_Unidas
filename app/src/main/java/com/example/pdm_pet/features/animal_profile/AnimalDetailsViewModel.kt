@@ -34,8 +34,6 @@ class AnimalDetailsViewModel : ViewModel() {
         get() = animal?.createdByUserId == UserSession.userId
 
     // URLs base (Ajuste conforme seu servidor)
-    private val BASE_IMAGE_URL = "https://patas-unidas-api.onrender.com/animalprofile/image/"
-    private val BASE_USER_IMAGE_URL = "https://patas-unidas-api.onrender.com/user/image/"
 
     @SuppressLint("MissingPermission")
     fun loadAnimal(context: Context, id: Long) {
@@ -108,10 +106,10 @@ class AnimalDetailsViewModel : ViewModel() {
     }
 
     fun getFullImageUrl(photoName: String?): String? {
-        return if (!photoName.isNullOrBlank()) "$BASE_IMAGE_URL$photoName" else null
+        return RetrofitClient.animalImageUrl(photoName)
     }
 
     fun getUserImageUrl(photoName: String?): String? {
-        return if (!photoName.isNullOrBlank()) "$BASE_USER_IMAGE_URL$photoName" else null
+        return RetrofitClient.userImageUrl(photoName)
     }
 }

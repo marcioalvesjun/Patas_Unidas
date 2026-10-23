@@ -1,5 +1,7 @@
 package com.example.pdm_pet.features.animal_profile
 
+import com.example.pdm_pet.utils.animalStatusLabel
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -80,7 +82,7 @@ fun EditAnimalScreen(
                 // Nota: Copie a função SimpleDropdown do CreateAnimalScreen se necessário
                 // Aqui estou simplificando a exibição para focar na lógica:
 
-                Text("Status Atual: ${viewModel.status}", fontWeight = FontWeight.Bold)
+                Text("Status Atual: ${animalStatusLabel(viewModel.status)}", fontWeight = FontWeight.Bold)
                 // (Adicione aqui os Dropdowns para Sexo, Porte e Status igual na tela de Criar, ligando nas variáveis do viewModel)
 
                 Spacer(modifier = Modifier.height(24.dp))
